@@ -37,7 +37,13 @@ export function useTmdb() {
           { id: 'discover', title: 'Discover', movies: discover },
         ])
       } catch (err) {
-        if (!cancelled) setError(err.message || 'Failed to load movies')
+        if (!cancelled) {
+          const msg = err.message || 'Failed to load movies'
+          const isNetworkError = msg === 'Failed to fetch' || msg.includes('NetworkError')
+          setError(isNetworkError
+            ? 'Failed to fetch. On Vercel: add VITE_TMDB_API_KEY in Project Settings → Environment Variables, then redeploy.'
+            : msg)
+        }
       } finally {
         if (!cancelled) setLoading(false)
       }

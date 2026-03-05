@@ -50,8 +50,12 @@ npm run preview
 
 For the app to work on Vercel (or any host), set the API key in the host’s environment:
 
-- **Vercel:** Project → **Settings** → **Environment Variables** → add `VITE_TMDB_API_KEY` with your TMDB API key (v3), then **Redeploy**.
-- Do not use placeholder values like `your_tmdb_api_key_here`; the app will show a clear error if the key is missing or invalid.
+**Fix "Failed to fetch" or API key errors on Vercel:**
+
+1. Open [Vercel Dashboard](https://vercel.com/dashboard) → your project → **Settings** → **Environment Variables**.
+2. Click **Add**. Name: `VITE_TMDB_API_KEY`. Value: your TMDB API key (v3 from [TMDB API Settings](https://www.themoviedb.org/settings/api)). Save.
+3. Go to **Deployments** → **⋮** on the latest deployment → **Redeploy**. (Vite reads env at build time.)
+4. After the deploy finishes, reload your app URL; movies should load.
 
 ## Project Structure
 

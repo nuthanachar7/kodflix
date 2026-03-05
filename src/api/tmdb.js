@@ -18,10 +18,20 @@ async function fetchTmdb(endpoint) {
   const key = getApiKey()
   const isPlaceholder = typeof key === 'string' && PLACEHOLDERS.includes(key.trim())
   if (!key || isPlaceholder) {
-    throw new Error('Missing or invalid VITE_TMDB_API_KEY in .env')
+    throw new Error(
+      'Missing or invalid VITE_TMDB_API_KEY. ' +
+      'Local: set it in .env. Vercel: Project Settings → Environment Variables → add VITE_TMDB_API_KEY, then redeploy.'
+    )
   }
   const url = `${API_BASE}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_key=${encodeURIComponent(key)}`
-  const res = await fetch(url)
+  let res
+  try {
+    res = await fetch(url)
+  } catch (networkErr) {
+    throw new Error(
+      'Cannot reach TMDB. If this is Vercel: add VITE_TMDB_API_KEY in Project Settings → Environment Variables and redeploy.'
+    )
+  }
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
     throw new Error(err.status_message || `TMDB API error: ${res.status}`)
