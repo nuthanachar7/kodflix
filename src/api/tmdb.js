@@ -12,9 +12,12 @@ export function getImageUrl(path, size = 'w500') {
   return `${IMAGE_BASE}/${size}${normalizedPath}`
 }
 
+const PLACEHOLDERS = ['your_actual_tmdb_api_key_here', 'your_tmdb_api_key_here']
+
 async function fetchTmdb(endpoint) {
   const key = getApiKey()
-  if (!key || key === 'your_actual_tmdb_api_key_here') {
+  const isPlaceholder = typeof key === 'string' && PLACEHOLDERS.includes(key.trim())
+  if (!key || isPlaceholder) {
     throw new Error('Missing or invalid VITE_TMDB_API_KEY in .env')
   }
   const url = `${API_BASE}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_key=${encodeURIComponent(key)}`

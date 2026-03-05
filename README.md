@@ -46,6 +46,13 @@ npm run preview
 - Open DevTools → Network and filter by "Fetch/XHR" to see requests to `api.themoviedb.org` returning 200 and JSON with `results`.
 - If you see "Missing or invalid VITE_TMDB_API_KEY", add your key to `.env` and **restart the dev server** (`Ctrl+C` then `npm run dev` again), because Vite reads env only at startup.
 
+## Deploying (e.g. Vercel)
+
+For the app to work on Vercel (or any host), set the API key in the host’s environment:
+
+- **Vercel:** Project → **Settings** → **Environment Variables** → add `VITE_TMDB_API_KEY` with your TMDB API key (v3), then **Redeploy**.
+- Do not use placeholder values like `your_tmdb_api_key_here`; the app will show a clear error if the key is missing or invalid.
+
 ## Project Structure
 
 - `src/api/tmdb.js` – TMDB API client and image URL helper

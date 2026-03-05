@@ -15,7 +15,8 @@ export default function App() {
           <p className="app__error-hint">
             Use your <strong>API Key (v3 auth)</strong> from{' '}
             <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener noreferrer">TMDB API Settings</a>, not the Read Access Token.
-            In <code>.env</code> put: <code>VITE_TMDB_API_KEY=your_key</code> with no quotes or spaces. Restart the dev server after changing <code>.env</code>.
+            Local: in <code>.env</code> put <code>VITE_TMDB_API_KEY=your_key</code> and restart the dev server.
+            Deployed (e.g. Vercel): add <code>VITE_TMDB_API_KEY</code> in Project Settings → Environment Variables, then redeploy.
           </p>
         </div>
       </div>
